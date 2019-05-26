@@ -1,0 +1,13 @@
+language: python
+python:
+  - "2.7"
+os:
+  - linux
+sudo: false
+before_script:
+  - git clone https://github.com/Sreyas-108/server_app.git
+install:
+  - pip install -r requirements.txt
+script:
+  - python tests.py
+cache: pip
