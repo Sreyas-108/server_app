@@ -1,5 +1,5 @@
 echo "Starting install..."
-TARGET_DIR="$HOME/api"
+TARGET_DIR="$HOME/api/server_app"
 SOURCE_CODE="https://github.com/LiquidGalaxyLab/liquid-galaxy-api"
 sudo apt-get update
 sudo apt-get install python3.6
