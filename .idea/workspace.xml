@@ -2,67 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e97a69d-fbb8-4632-9c9f-e6a306a72adf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/server_app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/__main__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/MessageHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/ModuleType.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/OSCSender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/OSCServer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/Validation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controller/server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/flyto/FlyToOptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/flyto/GenerateKML.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/gestures/GenerateKML.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/KMLData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/poi/GenerateKML.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/KMLUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/LogUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/MessageHandler.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/ModuleType.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/OSCSender.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/OSCServer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/Validation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/controller/server.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/flyto/FlyToOptions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/flyto/GenerateKML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/flyto/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/gestures/GenerateKML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/gestures/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/models/KMLData.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/models/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/poi/GenerateKML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/poi/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/utils/KMLUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/utils/LogUtils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/app/utils/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/config/Config.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/config/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_OSCSender.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_OSCServer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_generateKML.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_handler.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_initApp.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/test/test_utils.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/execute.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/tests.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_OSCSender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_OSCServer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_generateKML.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_initApp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/install.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+            <state relative-caret-position="187">
+              <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -148,7 +89,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="105" />
     <option name="y" value="95" />
     <option name="width" value="1750" />
@@ -167,11 +108,6 @@
             <path>
               <item name="server_app" type="b2602c69:ProjectViewProjectNode" />
               <item name="server_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="server_app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server_app" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -387,7 +323,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20211361" />
@@ -736,8 +672,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        <state relative-caret-position="187">
+          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
         </state>
       </provider>
     </entry>
