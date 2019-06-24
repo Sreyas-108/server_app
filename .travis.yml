@@ -5,8 +5,7 @@ os:
   - linux
 sudo: false
 before_script:
-  - cd scripts
-  - chmod +x tests.sh
+  - chmod +x scripts/tests.sh
 script:
-  - ./tests.sh
+  - ./scripts/tests.sh
 cache: pip
