@@ -6,8 +6,7 @@ os:
 sudo: false
 before_script:
   - cd scripts
-  - chmod +x install.sh
-  - ./install.sh
+  - chmod +x tests.sh
 script:
   - ./tests.sh
 cache: pip
