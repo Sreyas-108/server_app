@@ -45,7 +45,9 @@ class ServerValidation:
 
     def _getIPAddress(self):
         """Get IP address of the current network."""
-        return socket.gethostbyname(socket.getfqdn())
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
 
     def _getPort(self):
         """Get port to be used from user. Default port is 3000."""
