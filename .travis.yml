@@ -5,9 +5,7 @@ os:
   - linux
 sudo: false
 before_script:
-  - git clone https://github.com/Sreyas-108/server_app.git
-install:
-  - pip install -r requirements.txt
+  - ./scripts/install.sh
 script:
-  - python tests.py
+  - ./scripts/tests.sh
 cache: pip
