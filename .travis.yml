@@ -5,7 +5,7 @@ os:
   - linux
 sudo: false
 before_script:
-  - cd scriptes
+  - cd scripts
   - ./install.sh
 script:
   - ./tests.sh
