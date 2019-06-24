@@ -1,6 +1,6 @@
 echo "Starting install..."
 TARGET_DIR="$HOME/api/server_app"
-SOURCE_CODE="https://github.com/LiquidGalaxyLab/liquid-galaxy-api"
+SOURCE_CODE="https://github.com/Sreyas-108/server_app"
 sudo apt-get update
 sudo apt-get install python3.6
 sudo apt-get install python3-venv
