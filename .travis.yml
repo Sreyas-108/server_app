@@ -6,6 +6,7 @@ os:
 sudo: false
 before_script:
   - cd scripts
+  - chmod +x install.sh
   - ./install.sh
 script:
   - ./tests.sh
