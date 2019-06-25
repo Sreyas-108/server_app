@@ -1,3 +1,3 @@
-cd $HOME/api/server_app
+cd ..
 source venv/bin/activate
 python -m unittest
