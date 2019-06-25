@@ -7,5 +7,6 @@ sudo: false
 before_script:
   - chmod +x scripts/tests.sh
 script:
-  - ./scripts/tests.sh
+  - cd scripts
+  - ./tests.sh
 cache: pip
