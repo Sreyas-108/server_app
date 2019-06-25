@@ -2,13 +2,29 @@
 
 > API to handle request from Controller application for the LG Screen.
 
-## Installation
-
-This application is under development.
-
 ## Getting Started
 
 Detailed instruction will be provided soon.
+
+## Installation
+
+**Install on master machine only.**
+
+The installation script is present in `/scripts/install.sh`
+
+Execute the installation file on the master machine from any user folder.
+```
+bash <(curl -s https://raw.githubusercontent.com/Sreyas-108/server_app/master/scripts/install.sh)
+```
+
+Requirements : 
+Nil
+
+To execute tests on the server app execute :
+```./scripts/tests.sh```
+
+####Run
+Once execution has been executed successfully, run the ```./scripts/execute.sh``` to start the api. Enter the socket to be used accordingly.
 
 ## Contributing
 
