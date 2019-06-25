@@ -10,3 +10,7 @@ cd "$TARGET_DIR"
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+cd scripts
+chmod +x execute.sh
+chmod +x tests.sh
+cd ..

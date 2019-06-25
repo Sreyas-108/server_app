@@ -7,6 +7,5 @@ sudo: false
 before_script:
   - chmod +x scripts/tests.sh
 script:
-  - cd scripts
-  - ./tests.sh
+  - python -m unittest
 cache: pip
