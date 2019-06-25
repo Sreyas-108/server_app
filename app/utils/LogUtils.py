@@ -5,14 +5,13 @@ from pathlib import Path
 
 class LogUtils:
     """Utilities for Logging."""
-    path = Path(os.path.abspath(os.path.join(Path(os.path.abspath(os.pardir)).parent, 'logs')))
+    path = Path(os.path.abspath(os.path.join(os.path.abspath(os.pardir), 'server_app/logs')))
     """Path of the logs file."""
-
     @classmethod
     def setUpLogs(cls):
         """Create and set log file format."""
         if not cls.path.exists():
-            os.mkdir(Path(os.path.abspath(os.path.join(Path(os.path.abspath(os.pardir)).parent, 'logs'))))
+            os.mkdir(cls.path)
         logging.basicConfig(filename=str(cls.path) + '/test.log', filemode='a', level=logging.DEBUG,
                             format='%(asctime)s : %(name)s - %(levelname)s - %(message)s : [in %(pathname)s:%(lineno)d]')
 
