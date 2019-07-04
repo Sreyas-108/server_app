@@ -5,7 +5,7 @@ from pathlib import Path
 
 class LogUtils:
     """Utilities for Logging."""
-    path = Path(os.path.abspath(os.path.join(os.path.abspath(os.pardir), 'server_app/logs')))
+    path = Path(os.path.abspath(os.path.join(os.path.abspath(os.pardir), '/logs')))
     """Path of the logs file."""
     @classmethod
     def setUpLogs(cls):
