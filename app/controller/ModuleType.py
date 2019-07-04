@@ -7,3 +7,4 @@ class ModuleType(enum.Enum):
     GESTURE = 0, "/gesture"
     FLYTO = 1, "/flyto"
     POI = 2, "/poi"
+    TOUR = 3, "/tour"

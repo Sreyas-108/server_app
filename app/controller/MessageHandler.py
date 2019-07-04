@@ -5,7 +5,9 @@ from app.controller.Validation import ServerValidation
 from app.flyto.GenerateKML import generateFlyTo
 from app.gestures.GenerateKML import generateGesture
 from app.models.KMLData import KMLData
+from app.models.TourData import TourData
 from app.poi.GenerateKML import generatePOI
+from app.tours.GenerateKML import generateTour
 from app.utils.LogUtils import LogUtils
 
 
@@ -39,5 +41,8 @@ def handle(self, *varargs):
     elif mod_type is ModuleType.POI:
         kmldata = KMLData.fromJson(data)
         generatePOI(kmldata)
+    elif mod_type is ModuleType.TOUR:
+        tourdata = TourData.fromJson(data)
+        generateTour(tourdata)
     else:
         LogUtils.writeWarning("Module type not handled failure.")
