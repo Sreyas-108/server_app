@@ -8,3 +8,4 @@ class ModuleType(enum.Enum):
     FLYTO = 1, "/flyto"
     POI = 2, "/poi"
     TOUR = 3, "/tour"
+    OVERLAY = 4, "/overlay"
