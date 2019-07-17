@@ -23,6 +23,10 @@ class ServerValidation:
         self._ipaddress = self._getIPAddress()
         self._port = self._getPort()
 
+        print('IP address of the machine : ' + self._ipaddress)
+        print('Port used for current execution : ' + str(self._port))
+        print('Unique ID of the machine : ' + str(self._id_lg))
+
     def validateID(self, id_lg):
         """Validate ID parameter of the incoming OSC message."""
         return self._id_lg == id_lg
