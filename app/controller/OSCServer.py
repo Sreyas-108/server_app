@@ -2,6 +2,7 @@ from pythonosc import dispatcher
 from pythonosc import osc_server
 
 from app.controller import MessageHandler
+from app.controller.SlaveHandler import SlaveHandler
 from app.controller.Validation import ServerValidation
 from app.utils.LogUtils import LogUtils
 
@@ -10,9 +11,11 @@ class OSCServer:
     """OSCServer set-up functionalities."""
     __instance = None
     __servervalidation = None
+    slaveinstance = None
 
     def __init__(self):
         OSCServer.__instance = self
+        self.slaveinstance = SlaveHandler.getInstance()
         self.__servervalidation = ServerValidation.getInstance()
         disp = dispatcher.Dispatcher()
         disp.map(self.__servervalidation.basePath + "/*", MessageHandler.handle)
