@@ -33,7 +33,7 @@ class HandlerTest(unittest.TestCase):
             handle('', 0, 0, 0)
         mock_validator.return_value.validateID.assert_called_once()
 
-    @patch('app.controller.MessageHandler.OSCSender')
+    @patch('app.controller.MessageHandler.FeedbackSender')
     def test_invalidParams(self, mock_sender):
         with self.assertLogs(logging.getLogger(), logging.CRITICAL):
             mock_sender.return_value.sendMessage.return_value = 0
