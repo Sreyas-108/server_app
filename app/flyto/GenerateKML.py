@@ -2,8 +2,8 @@ import os
 
 import simplekml
 
+from app.controller.FeedbackSender import FeedbackSender
 from app.controller.ModuleType import ModuleType
-from app.controller.OSCSender import OSCSender
 from app.flyto.FlyToOptions import FlyToOptions
 from app.utils.KMLUtils import KMLUtils
 from app.utils.LogUtils import LogUtils
@@ -16,7 +16,7 @@ def generateFlyTo(data):
         flyto = FlyToOptions(data.lower())
     except Exception as e:
         LogUtils.writeWarning("Wrong target location for Fly To received : " + str(e))
-        OSCSender.getInstance().sendMessage(ModuleType.FLYTO, "Wrong target location for Fly To received.")
+        FeedbackSender.getInstance().sendMessage(ModuleType.FLYTO, "Wrong target location for Fly To received.")
         return
     try:
         kml = simplekml.Kml()
@@ -25,4 +25,4 @@ def generateFlyTo(data):
         os.startfile(KMLUtils.getFilePath())
     except Exception as e:
         LogUtils.writeWarning("KML generation for fly to failure : " + str(e))
-        OSCSender.getInstance().sendMessage(ModuleType.GESTURE, "KML generation for fly to failure.")
+        FeedbackSender.getInstance().sendMessage(ModuleType.GESTURE, "KML generation for fly to failure.")

@@ -5,10 +5,10 @@ from pathlib import Path
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from oauth2client.service_account import ServiceAccountCredentials
-from app.utils.KMLUtils import KMLUtils
 
+from app.controller.FeedbackSender import FeedbackSender
 from app.controller.ModuleType import ModuleType
-from app.controller.OSCSender import OSCSender
+from app.utils.KMLUtils import KMLUtils
 from app.utils.LogUtils import LogUtils
 from config.Config import Config
 
@@ -67,7 +67,7 @@ class FileRequests:
         except Exception as e:
             print(str(e))
             LogUtils.writeWarning("Google Drive file download failure : " + str(e))
-            OSCSender.getInstance().sendMessage(ModuleType.TOUR, "File download failure for tour.")
+            FeedbackSender.getInstance().sendMessage(ModuleType.TOUR, "File download failure for tour.")
             return False
 
     def getAllFiles(self):
