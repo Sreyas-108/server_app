@@ -8,7 +8,7 @@ Detailed instruction will be provided soon.
 
 ## Installation
 
-**Install on master machine only.**
+**Install on all machines.**
 
 The installation script is present in `/scripts/install.sh`
 
