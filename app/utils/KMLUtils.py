@@ -12,4 +12,4 @@ class KMLUtils:
     @staticmethod
     def getFilePath():
         """Get the default path of storing KML files."""
-        return "D:\\KMLScripts\\gline.kml"
+        return "gline.kml"

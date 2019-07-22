@@ -12,7 +12,7 @@ Detailed instruction will be provided soon.
 
 The installation script is present in `/scripts/install.sh`
 
-Execute the installation file on the master machine from any user folder.
+Execute the installation file from any user folder.
 ```
 bash <(curl -s https://raw.githubusercontent.com/Sreyas-108/server_app/master/scripts/install.sh)
 ```
