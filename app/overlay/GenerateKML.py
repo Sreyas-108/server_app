@@ -18,7 +18,7 @@ def generateOverlay(data):
             if isinstance(i, PlacemarkData):
                 pnt = kml.newpoint(name="Default", description="Def", coords=[(i.longitude, i.latitude)])
                 pnt.style.iconstyle.color = 'ffff00ff'
-                pnt.style.iconstyle.scale = 3
+                pnt.style.iconstyle.scale = i.iconSize
                 pnt.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
                 pnt.lookat.latitude = data.latitude
                 pnt.lookat.longitude = data.longitude

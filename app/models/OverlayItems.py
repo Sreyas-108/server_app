@@ -13,7 +13,6 @@ class OverlayItem(ABC):
     @classmethod
     def fromJson(cls, jsonString):
         """Get Overlay items from [jsonString]."""
-        print(jsonString)
         if jsonString['type'] == ('Placemark'):
             return PlacemarkData.fromJson(json.dumps(jsonString))
         return None
@@ -26,6 +25,11 @@ class PlacemarkData(OverlayItem):
         self._id = ""
         self._latitude = 0.0
         self._longitude = 0.0
+        self._zInd = 0.0
+        self._title = ""
+        self._desc = ""
+        self._iconSize = 0
+        self._iconColor = 0.0
 
     @property
     def latitude(self):
@@ -34,6 +38,10 @@ class PlacemarkData(OverlayItem):
     @property
     def longitude(self):
         return self._longitude
+
+    @property
+    def iconSize(self):
+        return self._iconSize
 
     def toJson(self):
         """Get JSON string from Placemark data."""
@@ -51,8 +59,18 @@ class PlacemarkData(OverlayItem):
         data = PlacemarkData()
         if 'id' in jsonDict:
             data._id = jsonDict['id']
-        if 'latitude' in jsonDict:
-            data._latitude = jsonDict['latitude']
-        if 'longitude' in jsonDict:
-            data._longitude = jsonDict['longitude']
+        if 'point' in jsonDict:
+            point = jsonDict['point']
+            jsonPoint = json.loads(json.dumps(point))
+            data._latitude = jsonPoint['latitude']
+            data._longitude = jsonPoint['longitude']
+            data._zInd = jsonPoint['zInd']
+        if 'title' in jsonDict:
+            data._title = jsonDict['title']
+        if 'desc' in jsonDict:
+            data._desc = jsonDict['desc']
+        if 'iconSize' in jsonDict:
+            data._iconSize = jsonDict['iconSize']
+        if 'iconColor' in jsonDict:
+            data._iconColor = jsonDict['iconColor']
         return data
