@@ -5,5 +5,5 @@ pip install -r requirements.txt
 echo "Setting permissions.."
 sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
-sudp iptables -P OUTPUT ACCEPT
+sudo iptables -P OUTPUT ACCEPT
 python -m app
