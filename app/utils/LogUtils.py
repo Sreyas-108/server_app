@@ -18,17 +18,20 @@ class LogUtils:
     @staticmethod
     def writeWarning(data):
         """Write warning log of [data]. For any failure."""
-        LogUtils.setUpLogs()
-        logging.warning(str(data))
+        #LogUtils.setUpLogs()
+        #logging.warning(str(data))
+        print('Warning : '+str(data))
 
     @staticmethod
     def writeCritical(data):
         """Write critical log of [data]. For high priority error."""
-        LogUtils.setUpLogs()
-        logging.critical(str(data))
+        #LogUtils.setUpLogs()
+        #logging.critical(str(data))
+        print('Critical : ' + str(data))
 
     @staticmethod
     def writeInfo(data):
         """Write info log of [data]. For step debugging."""
-        LogUtils.setUpLogs()
-        logging.info(str(data))
+        #LogUtils.setUpLogs()
+        #logging.info(str(data))
+        print('Info : ' + str(data))

@@ -20,11 +20,11 @@ bash <(curl -s https://raw.githubusercontent.com/Sreyas-108/server_app/master/sc
 Requirements : 
 Nil
 
-To execute tests on the server app execute :
+To execute tests on the server app execute (only for development purposes) :
 ```./scripts/tests.sh```
 
 ####Run
-Once execution has been executed successfully, run the ```./scripts/execute.sh``` to start the api. Enter the socket to be used accordingly.
+Once execution has been executed successfully, run the ```./scripts/execute.sh``` to start the api. Enter the details accordingly. It will be present in the '$HOME/api/server_app' folder.
 
 ## Contributing
 
