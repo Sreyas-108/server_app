@@ -1,16 +1,16 @@
-import os
-
+import requests
 import simplekml
 
 from app.controller.FeedbackSender import FeedbackSender
 from app.controller.ModuleType import ModuleType
-from app.models.OverlayItems import PlacemarkData
 from app.models.OverlayItems import LineData
+from app.models.OverlayItems import PlacemarkData
+from app.utils.DeployUtils import DeployUtils
 from app.utils.KMLUtils import KMLUtils
 from app.utils.LogUtils import LogUtils
 
 
-def generateOverlay(data):
+def generateOverlay(data, ip):
     """Generate KML file for Overlay [data]."""
     LogUtils.writeInfo("KML generation for Overlay.")
     try:
@@ -32,7 +32,9 @@ def generateOverlay(data):
                 line.style.linestyle.color = i.color
                 line.style.linestyle.width = i.width
         kml.save(KMLUtils.getFilePath())
-        os.startfile(KMLUtils.getFilePath())
+        multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
+        requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
+        # os.startfile(KMLUtils.getFilePath())
     except Exception as e:
         LogUtils.writeWarning("KML generation for overlay failure : " + str(e))
         FeedbackSender.getInstance().sendMessage(ModuleType.GESTURE, "KML generation for overlay failure.")

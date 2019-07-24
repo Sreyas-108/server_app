@@ -40,17 +40,17 @@ def handle(self, *varargs):
         OSCServer.OSCServer.getInstance().server_end()
     elif mod_type is ModuleType.GESTURE:
         kmldata = KMLData.fromJson(data)
-        generateGesture(kmldata)
+        generateGesture(kmldata, serverVal.ipaddress)
     elif mod_type is ModuleType.FLYTO:
-        generateFlyTo(data)
+        generateFlyTo(data, serverVal.ipaddress)
     elif mod_type is ModuleType.POI:
         kmldata = KMLData.fromJson(data)
-        generatePOI(kmldata)
+        generatePOI(kmldata, serverVal.ipaddress)
     elif mod_type is ModuleType.TOUR:
         tourdata = TourData.fromJson(data)
-        generateTour(tourdata)
+        generateTour(tourdata, serverVal.ipaddress)
     elif mod_type is ModuleType.OVERLAY:
         overlaydata = OverlayData.fromJson(data)
-        generateOverlay(overlaydata)
+        generateOverlay(overlaydata, serverVal.ipaddress)
     else:
         LogUtils.writeWarning("Module type not handled failure.")
