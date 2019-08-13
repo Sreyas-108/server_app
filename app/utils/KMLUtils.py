@@ -1,3 +1,7 @@
+import random
+import string
+
+
 class KMLUtils:
     """Utilities for KML processing."""
 
@@ -12,4 +16,4 @@ class KMLUtils:
     @staticmethod
     def getFilePath():
         """Get the default path of storing KML files."""
-        return "gline.kml"
+        return ''.join(random.choice(string.ascii_uppercase) for _ in range(12)) + ".kml"
