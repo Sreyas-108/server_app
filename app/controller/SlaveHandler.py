@@ -16,9 +16,9 @@ class SlaveHandler:
 
     def __init__(self):
         SlaveHandler.__instance = self
-        self.__isMaster = self._isMaster() == 0
+        self.__isMaster = True
         if self.__isMaster is True:
-            self.__numOfSlaves = self._getSlaves()
+            self.__numOfSlaves = 0
             self.__slaves = self._getIP()
             self.__sender = OSCSender.getInstance()
 
