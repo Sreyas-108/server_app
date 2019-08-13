@@ -17,7 +17,6 @@ def generateTour(data, ip):
             fr.downloadFile(data.fileID)
             multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
             requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
-            # os.startfile(KMLUtils.getFilePath())
         else:
             LogUtils.writeWarning("Authorization for drive access failure.")
     except Exception as e:

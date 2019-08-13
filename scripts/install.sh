@@ -14,9 +14,7 @@ source venv/bin/activate
 echo "Installing requirements.."
 pip install -r requirements.txt
 echo "Setting permissions.."
-sudo iptables -P INPUT ACCEPT
-sudo iptables -P FORWARD ACCEPT
-sudo iptables -P OUTPUT ACCEPT
+echo "Permissions already set."
 echo "Server application installation complete.."
 echo "Installed location is $TARGET_DIR"
 echo "Proceed with starting the server application."
