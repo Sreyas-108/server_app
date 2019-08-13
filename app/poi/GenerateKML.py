@@ -23,7 +23,6 @@ def generatePOI(data, ip):
         kml.save(KMLUtils.getFilePath())
         multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
         requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
-        # os.startfile(KMLUtils.getFilePath())
     except Exception as e:
         LogUtils.writeWarning("KML generation for POI failure : " + str(e))
         FeedbackSender.getInstance().sendMessage(ModuleType.GESTURE, "KML generation for POI failure.")
