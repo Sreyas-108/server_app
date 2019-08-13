@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e97a69d-fbb8-4632-9c9f-e6a306a72adf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/lg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controller/SlaveHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/SlaveHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controller/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/Validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/flyto/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/flyto/GenerateKML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/gestures/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/gestures/GenerateKML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/OverlayItems.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/OverlayItems.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/overlay/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/overlay/GenerateKML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/poi/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/poi/GenerateKML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tours/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tours/GenerateKML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/KMLUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/KMLUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/execute.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/execute.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/install.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
