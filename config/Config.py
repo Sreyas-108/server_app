@@ -1,3 +1,3 @@
 class Config:
     """Contains all the configuration keys and credentials."""
-    GOOGLE_DRIVE_CREDENTIALS = {}
+    GOOGLE_DRIVE_CREDENTIALS = 'config/lgcontrol-xxxxx.json'
