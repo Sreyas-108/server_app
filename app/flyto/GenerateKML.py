@@ -21,8 +21,9 @@ def generateFlyTo(data, ip):
     try:
         kml = simplekml.Kml()
         kml.hint = 'target=' + flyto.value
-        kml.save(KMLUtils.getFilePath())
-        multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
+        path = KMLUtils.getFilePath()
+        kml.save(path)
+        multipart_form_data = {'kml': (path, open(path, 'r'))}
         requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
     except Exception as e:
         LogUtils.writeWarning("KML generation for fly to failure : " + str(e))

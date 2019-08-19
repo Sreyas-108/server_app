@@ -20,8 +20,9 @@ def generateGesture(data, ip):
         pnt.lookat.range = KMLUtils.convertZoomToRange(data.zoom)
         pnt.lookat.heading = data.bearing
         pnt.lookat.tilt = data.tilt
-        kml.save(KMLUtils.getFilePath())
-        multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
+        path = KMLUtils.getFilePath()
+        kml.save(path)
+        multipart_form_data = {'kml': (path, open(path, 'r'))}
         requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
     except Exception as e:
         LogUtils.writeWarning("KML generation for gesture failure : " + str(e))

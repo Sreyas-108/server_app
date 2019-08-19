@@ -19,7 +19,7 @@ def generateOverlay(data, ip):
         kml = simplekml.Kml()
         for i in data.itemData:
             if isinstance(i, PlacemarkData):
-                pnt = kml.newpoint(name=i.title, description=i.desc, coords=[(i.longitude, i.latitude)])
+                pnt = kml.newpoint(name=i.title, description=i.desc, coords=[(i.longitude, i.latitude, i.zIndex)])
                 pnt.style.iconstyle.color = i.iconColor
                 pnt.style.iconstyle.scale = i.iconSize
                 pnt.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
@@ -30,8 +30,8 @@ def generateOverlay(data, ip):
                 pnt.lookat.tilt = data.tilt
             elif isinstance(i, LineData):
                 line = kml.newlinestring(name=i.title, description=i.desc,
-                                         coords=[(i.points[0].longitude, i.points[0].latitude),
-                                                 (i.points[1].longitude, i.points[1].latitude)])
+                                         coords=[(i.points[0].longitude, i.points[0].latitude, i.points[0].zIndex),
+                                                 (i.points[1].longitude, i.points[1].latitude, i.points[1].zIndex)])
                 line.style.linestyle.color = i.color
                 line.style.linestyle.width = i.width
                 line.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
@@ -47,7 +47,7 @@ def generateOverlay(data, ip):
                 poly.style.polystyle.color = i.color
                 boundary = []
                 for j in i.points:
-                    boundary.append((j.longitude, j.latitude))
+                    boundary.append((j.longitude, j.latitude, j.zIndex))
                 poly.outerboundaryis = boundary
                 poly.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
                 poly.lookat.latitude = data.latitude
@@ -57,7 +57,7 @@ def generateOverlay(data, ip):
                 poly.lookat.tilt = data.tilt
             elif isinstance(i, ImageData):
                 photo = kml.newphotooverlay(name=i.title, description=i.desc)
-                photo.point.coords = [(i.longitude, i.latitude)]
+                photo.point.coords = [(i.longitude, i.latitude, i.zIndex)]
                 photo.style.iconstyle.icon.href = 'lg.png'
                 photo.lookat.gxaltitudemode = simplekml.GxAltitudeMode.relativetoseafloor
                 photo.lookat.latitude = data.latitude
@@ -66,8 +66,9 @@ def generateOverlay(data, ip):
                 photo.lookat.heading = data.bearing
                 photo.lookat.tilt = data.tilt
                 kml.addfile('lg.png')
-        kml.savekmz(KMLUtils.getFilePath())
-        multipart_form_data = {'kml': (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), 'r'))}
+        path = KMLUtils.getFilePath()
+        kml.savekmz(path)
+        multipart_form_data = {'kml': (path, open(path, 'r'))}
         requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
     except Exception as e:
         LogUtils.writeWarning("KML generation for overlay failure : " + str(e))
