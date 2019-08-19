@@ -18,7 +18,7 @@ def handle(self, *varargs):
     if len(varargs) != 3:
         LogUtils.writeCritical("Parameter validation failure : Incorrect number of parameters sent in OSC message")
         FeedbackSender.getInstance().sendMessage(ModuleType.EXIT,
-                                            "Parameter validation failure : Incorrect number of parameters sent in OSC message")
+                                                 "Parameter validation failure : Incorrect number of parameters sent in OSC message")
         return
     id_lg = varargs[0]
     encoding = varargs[1]
