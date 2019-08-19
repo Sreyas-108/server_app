@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e97a69d-fbb8-4632-9c9f-e6a306a72adf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/logs/test.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controller/FeedbackSender.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/FeedbackSender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controller/MessageHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/MessageHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controller/ModuleType.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/ModuleType.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controller/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controller/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/flyto/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/flyto/GenerateKML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/gestures/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/gestures/GenerateKML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/overlay/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/overlay/GenerateKML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/poi/GenerateKML.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/poi/GenerateKML.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/LogUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/LogUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/Config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,15 +29,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>hand</find>
-      <find>print</find>
-      <find>prin</find>
-      <find>getall</find>
-      <find>pr</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
