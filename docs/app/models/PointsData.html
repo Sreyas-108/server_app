@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.3" />
-<title>test.test_utils API documentation</title>
+<title>app.models.PointsData API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,37 +17,54 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>test.test_utils</code></h1>
+<h1 class="title">Module <code>app.models.PointsData</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">import logging
-import random
-import unittest
-
-from app.utils.KMLUtils import KMLUtils
-from app.utils.LogUtils import LogUtils
+<pre><code class="python">import json
 
 
-class UtilsTest(unittest.TestCase):
-    &#34;&#34;&#34;Tests for all utility functions.&#34;&#34;&#34;
+class PointsData:
+    &#34;&#34;&#34;Model class for Point data.&#34;&#34;&#34;
 
-    def test_range(self):
-        range = KMLUtils.convertZoomToRange(random.randint(1, 1000))
-        self.assertGreater(range, 299)
+    def __init__(self):
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
 
-    def test_pathExistence(self):
-        LogUtils.setUpLogs()
-        self.assertEqual(LogUtils.path.exists(), True)
+    @property
+    def latitude(self):
+        return self._latitude
 
-    def test_logEntry(self):
-        with self.assertLogs(logging.getLogger(), logging.INFO):
-            LogUtils.writeInfo(&#39;Default test&#39;)
-        with self.assertLogs(logging.getLogger(), logging.WARNING):
-            LogUtils.writeWarning(&#39;Default test&#39;)
-        with self.assertLogs(logging.getLogger(), logging.CRITICAL):
-            LogUtils.writeCritical(&#39;Default test&#39;)</code></pre>
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Point data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;latitude&#39;: self._latitude,
+            &#39;longitude&#39;: self._longitude,
+            &#39;zInd&#39;: self._longitude,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Point data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PointsData()
+        if &#39;latitude&#39; in jsonDict:
+            data._latitude = jsonDict[&#39;latitude&#39;]
+        if &#39;longitude&#39; in jsonDict:
+            data._longitude = jsonDict[&#39;longitude&#39;]
+        if &#39;zInd&#39; in jsonDict:
+            data._zInd = jsonDict[&#39;zInd&#39;]
+        return data</code></pre>
 </details>
 </section>
 <section>
@@ -59,80 +76,127 @@ class UtilsTest(unittest.TestCase):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="test.test_utils.UtilsTest"><code class="flex name class">
-<span>class <span class="ident">UtilsTest</span></span>
-<span>(</span><span>methodName='runTest')</span>
+<dt id="app.models.PointsData.PointsData"><code class="flex name class">
+<span>class <span class="ident">PointsData</span></span>
 </code></dt>
 <dd>
-<section class="desc"><p>Tests for all utility functions.</p>
-<p>Create an instance of the class that will use the named test
-method when executed. Raises a ValueError if the instance does
-not have a method with the specified name.</p></section>
+<section class="desc"><p>Model class for Point data.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class UtilsTest(unittest.TestCase):
-    &#34;&#34;&#34;Tests for all utility functions.&#34;&#34;&#34;
+<pre><code class="python">class PointsData:
+    &#34;&#34;&#34;Model class for Point data.&#34;&#34;&#34;
 
-    def test_range(self):
-        range = KMLUtils.convertZoomToRange(random.randint(1, 1000))
-        self.assertGreater(range, 299)
+    def __init__(self):
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
 
-    def test_pathExistence(self):
-        LogUtils.setUpLogs()
-        self.assertEqual(LogUtils.path.exists(), True)
+    @property
+    def latitude(self):
+        return self._latitude
 
-    def test_logEntry(self):
-        with self.assertLogs(logging.getLogger(), logging.INFO):
-            LogUtils.writeInfo(&#39;Default test&#39;)
-        with self.assertLogs(logging.getLogger(), logging.WARNING):
-            LogUtils.writeWarning(&#39;Default test&#39;)
-        with self.assertLogs(logging.getLogger(), logging.CRITICAL):
-            LogUtils.writeCritical(&#39;Default test&#39;)</code></pre>
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Point data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;latitude&#39;: self._latitude,
+            &#39;longitude&#39;: self._longitude,
+            &#39;zInd&#39;: self._longitude,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Point data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PointsData()
+        if &#39;latitude&#39; in jsonDict:
+            data._latitude = jsonDict[&#39;latitude&#39;]
+        if &#39;longitude&#39; in jsonDict:
+            data._longitude = jsonDict[&#39;longitude&#39;]
+        if &#39;zInd&#39; in jsonDict:
+            data._zInd = jsonDict[&#39;zInd&#39;]
+        return data</code></pre>
 </details>
-<h3>Ancestors</h3>
-<ul class="hlist">
-<li>unittest.case.TestCase</li>
-</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.PointsData.PointsData.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Point data from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Point data from [jsonString].&#34;&#34;&#34;
+    jsonDict = json.loads(jsonString)
+    data = PointsData()
+    if &#39;latitude&#39; in jsonDict:
+        data._latitude = jsonDict[&#39;latitude&#39;]
+    if &#39;longitude&#39; in jsonDict:
+        data._longitude = jsonDict[&#39;longitude&#39;]
+    if &#39;zInd&#39; in jsonDict:
+        data._zInd = jsonDict[&#39;zInd&#39;]
+    return data</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="app.models.PointsData.PointsData.latitude"><code class="name">var <span class="ident">latitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def latitude(self):
+    return self._latitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.PointsData.PointsData.longitude"><code class="name">var <span class="ident">longitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def longitude(self):
+    return self._longitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.PointsData.PointsData.zIndex"><code class="name">var <span class="ident">zIndex</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def zIndex(self):
+    return self._zInd</code></pre>
+</details>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
-<dt id="test.test_utils.UtilsTest.test_logEntry"><code class="name flex">
-<span>def <span class="ident">test_logEntry</span></span>(<span>self)</span>
+<dt id="app.models.PointsData.PointsData.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p>Get JSON string from Point data.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def test_logEntry(self):
-    with self.assertLogs(logging.getLogger(), logging.INFO):
-        LogUtils.writeInfo(&#39;Default test&#39;)
-    with self.assertLogs(logging.getLogger(), logging.WARNING):
-        LogUtils.writeWarning(&#39;Default test&#39;)
-    with self.assertLogs(logging.getLogger(), logging.CRITICAL):
-        LogUtils.writeCritical(&#39;Default test&#39;)</code></pre>
-</details>
-</dd>
-<dt id="test.test_utils.UtilsTest.test_pathExistence"><code class="name flex">
-<span>def <span class="ident">test_pathExistence</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def test_pathExistence(self):
-    LogUtils.setUpLogs()
-    self.assertEqual(LogUtils.path.exists(), True)</code></pre>
-</details>
-</dd>
-<dt id="test.test_utils.UtilsTest.test_range"><code class="name flex">
-<span>def <span class="ident">test_range</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def test_range(self):
-    range = KMLUtils.convertZoomToRange(random.randint(1, 1000))
-    self.assertGreater(range, 299)</code></pre>
+<pre><code class="python">def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Point data.&#34;&#34;&#34;
+    return json.dumps({
+        &#39;latitude&#39;: self._latitude,
+        &#39;longitude&#39;: self._longitude,
+        &#39;zInd&#39;: self._longitude,
+    })</code></pre>
 </details>
 </dd>
 </dl>
@@ -148,17 +212,19 @@ not have a method with the specified name.</p></section>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="test" href="index.html">test</a></code></li>
+<li><code><a title="app.models" href="index.html">app.models</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="test.test_utils.UtilsTest" href="#test.test_utils.UtilsTest">UtilsTest</a></code></h4>
+<h4><code><a title="app.models.PointsData.PointsData" href="#app.models.PointsData.PointsData">PointsData</a></code></h4>
 <ul class="">
-<li><code><a title="test.test_utils.UtilsTest.test_logEntry" href="#test.test_utils.UtilsTest.test_logEntry">test_logEntry</a></code></li>
-<li><code><a title="test.test_utils.UtilsTest.test_pathExistence" href="#test.test_utils.UtilsTest.test_pathExistence">test_pathExistence</a></code></li>
-<li><code><a title="test.test_utils.UtilsTest.test_range" href="#test.test_utils.UtilsTest.test_range">test_range</a></code></li>
+<li><code><a title="app.models.PointsData.PointsData.fromJson" href="#app.models.PointsData.PointsData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.PointsData.PointsData.latitude" href="#app.models.PointsData.PointsData.latitude">latitude</a></code></li>
+<li><code><a title="app.models.PointsData.PointsData.longitude" href="#app.models.PointsData.PointsData.longitude">longitude</a></code></li>
+<li><code><a title="app.models.PointsData.PointsData.toJson" href="#app.models.PointsData.PointsData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.PointsData.PointsData.zIndex" href="#app.models.PointsData.PointsData.zIndex">zIndex</a></code></li>
 </ul>
 </li>
 </ul>

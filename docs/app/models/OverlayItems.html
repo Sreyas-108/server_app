@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.6.3" />
+<title>app.models.OverlayItems API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>app.models.OverlayItems</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">import json
+from abc import ABC, abstractmethod
+from app.models.PointsData import PointsData
+
+
+class OverlayItem(ABC):
+    &#34;&#34;&#34;Model class for Overlay items.&#34;&#34;&#34;
+
+    @abstractmethod
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Overlay item.&#34;&#34;&#34;
+        pass
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Overlay items from [jsonString].&#34;&#34;&#34;
+        if jsonString[&#39;type&#39;] == (&#39;Placemark&#39;):
+            return PlacemarkData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Line&#39;):
+            return LineData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Polygon&#39;):
+            return PolygonData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Image&#39;):
+            return ImageData.fromJson(json.dumps(jsonString))
+        return None
+
+
+class PlacemarkData(OverlayItem):
+    &#34;&#34;&#34;Model class for Placemark data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._iconSize = 0
+        self._iconColor = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    @property
+    def iconSize(self):
+        return self._iconSize
+
+    @property
+    def iconColor(self):
+        return self._iconColor
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Placemark data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;point&#39;: self._latitude,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;iconSize&#39;: self._iconSize,
+            &#39;iconColor&#39;: self._iconColor,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Placemark data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PlacemarkData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;point&#39; in jsonDict:
+            point = jsonDict[&#39;point&#39;]
+            jsonPoint = json.loads(json.dumps(point))
+            data._latitude = jsonPoint[&#39;latitude&#39;]
+            data._longitude = jsonPoint[&#39;longitude&#39;]
+            data._zInd = jsonPoint[&#39;zInd&#39;]
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;iconSize&#39; in jsonDict:
+            data._iconSize = jsonDict[&#39;iconSize&#39;]
+        if &#39;iconColor&#39; in jsonDict:
+            color = &#39;00000000&#39;
+            if jsonDict[&#39;iconColor&#39;] == 0:
+                color = &#39;FF0000FF&#39;
+            elif jsonDict[&#39;iconColor&#39;] == 120:
+                color = &#39;FF00FF00&#39;
+            elif jsonDict[&#39;iconColor&#39;] == 240:
+                color = &#39;FFFF0000&#39;
+            data._iconColor = color
+        return data
+
+
+class LineData(OverlayItem):
+    &#34;&#34;&#34;Model class for Line data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._points = []
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._width = 0
+        self._color = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def points(self):
+        return self._points
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def color(self):
+        return self._color
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Line data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;points&#39;: self._points,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;width&#39;: self._width,
+            &#39;color&#39;: self._color,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Line data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = LineData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;points&#39; in jsonDict:
+            point = jsonDict[&#39;points&#39;]
+            for i in point:
+                data._points.append(PointsData.fromJson(json.dumps(i)))
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;width&#39; in jsonDict:
+            data._width = jsonDict[&#39;width&#39;]
+        if &#39;color&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+            data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        return data
+
+
+class PolygonData(OverlayItem):
+    &#34;&#34;&#34;Model class for Polygon data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._points = []
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._width = 0
+        self._color = 0.0
+        self._strokeColor = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def points(self):
+        return self._points
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def color(self):
+        return self._color
+
+    @property
+    def strokeColor(self):
+        return self._strokeColor
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Polygon data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;points&#39;: self._points,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;width&#39;: self._width,
+            &#39;color&#39;: self._color,
+            &#39;strokeColor&#39;: self._strokeColor,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Polygon data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PolygonData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;points&#39; in jsonDict:
+            point = jsonDict[&#39;points&#39;]
+            for i in point:
+                data._points.append(PointsData.fromJson(json.dumps(i)))
+            data._points.append(PointsData.fromJson(json.dumps(point[0])))
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;width&#39; in jsonDict:
+            data._width = jsonDict[&#39;width&#39;]
+        if &#39;color&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+            data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        if &#39;strokeColor&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;strokeColor&#39;])[2:]
+            data._strokeColor = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        return data
+
+
+class ImageData(OverlayItem):
+    &#34;&#34;&#34;Model class for Image data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._image = 0
+        self._thumbnail = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    @property
+    def image(self):
+        return self._image
+
+    @property
+    def thumbnail(self):
+        return self._thumbnail
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Image data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;point&#39;: self._latitude,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;image&#39;: self._image,
+            &#39;thumbnail&#39;: self._thumbnail,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Image data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = ImageData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;point&#39; in jsonDict:
+            point = jsonDict[&#39;point&#39;]
+            jsonPoint = json.loads(json.dumps(point))
+            data._latitude = jsonPoint[&#39;latitude&#39;]
+            data._longitude = jsonPoint[&#39;longitude&#39;]
+            data._zInd = jsonPoint[&#39;zInd&#39;]
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;image&#39; in jsonDict:
+            data._image = jsonDict[&#39;image&#39;]
+        if &#39;thumbnail&#39; in jsonDict:
+            data._thumbnail = jsonDict[&#39;thumbnail&#39;]
+        return data</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="app.models.OverlayItems.ImageData"><code class="flex name class">
+<span>class <span class="ident">ImageData</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>Model class for Image data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class ImageData(OverlayItem):
+    &#34;&#34;&#34;Model class for Image data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._image = 0
+        self._thumbnail = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    @property
+    def image(self):
+        return self._image
+
+    @property
+    def thumbnail(self):
+        return self._thumbnail
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Image data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;point&#39;: self._latitude,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;image&#39;: self._image,
+            &#39;thumbnail&#39;: self._thumbnail,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Image data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = ImageData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;point&#39; in jsonDict:
+            point = jsonDict[&#39;point&#39;]
+            jsonPoint = json.loads(json.dumps(point))
+            data._latitude = jsonPoint[&#39;latitude&#39;]
+            data._longitude = jsonPoint[&#39;longitude&#39;]
+            data._zInd = jsonPoint[&#39;zInd&#39;]
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;image&#39; in jsonDict:
+            data._image = jsonDict[&#39;image&#39;]
+        if &#39;thumbnail&#39; in jsonDict:
+            data._thumbnail = jsonDict[&#39;thumbnail&#39;]
+        return data</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="app.models.OverlayItems.OverlayItem" href="#app.models.OverlayItems.OverlayItem">OverlayItem</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.ImageData.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Image data from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Image data from [jsonString].&#34;&#34;&#34;
+    jsonDict = json.loads(jsonString)
+    data = ImageData()
+    if &#39;id&#39; in jsonDict:
+        data._id = jsonDict[&#39;id&#39;]
+    if &#39;point&#39; in jsonDict:
+        point = jsonDict[&#39;point&#39;]
+        jsonPoint = json.loads(json.dumps(point))
+        data._latitude = jsonPoint[&#39;latitude&#39;]
+        data._longitude = jsonPoint[&#39;longitude&#39;]
+        data._zInd = jsonPoint[&#39;zInd&#39;]
+    if &#39;title&#39; in jsonDict:
+        data._title = jsonDict[&#39;title&#39;]
+    if &#39;desc&#39; in jsonDict:
+        data._desc = jsonDict[&#39;desc&#39;]
+    if &#39;image&#39; in jsonDict:
+        data._image = jsonDict[&#39;image&#39;]
+    if &#39;thumbnail&#39; in jsonDict:
+        data._thumbnail = jsonDict[&#39;thumbnail&#39;]
+    return data</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="app.models.OverlayItems.ImageData.desc"><code class="name">var <span class="ident">desc</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def desc(self):
+    return self._desc</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.image"><code class="name">var <span class="ident">image</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def image(self):
+    return self._image</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.latitude"><code class="name">var <span class="ident">latitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def latitude(self):
+    return self._latitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.longitude"><code class="name">var <span class="ident">longitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def longitude(self):
+    return self._longitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.thumbnail"><code class="name">var <span class="ident">thumbnail</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def thumbnail(self):
+    return self._thumbnail</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.title"><code class="name">var <span class="ident">title</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def title(self):
+    return self._title</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.ImageData.zIndex"><code class="name">var <span class="ident">zIndex</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def zIndex(self):
+    return self._zInd</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.ImageData.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get JSON string from Image data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Image data.&#34;&#34;&#34;
+    return json.dumps({
+        &#39;id&#39;: self._id,
+        &#39;point&#39;: self._latitude,
+        &#39;title&#39;: self._title,
+        &#39;desc&#39;: self._desc,
+        &#39;image&#39;: self._image,
+        &#39;thumbnail&#39;: self._thumbnail,
+    })</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="app.models.OverlayItems.LineData"><code class="flex name class">
+<span>class <span class="ident">LineData</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>Model class for Line data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class LineData(OverlayItem):
+    &#34;&#34;&#34;Model class for Line data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._points = []
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._width = 0
+        self._color = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def points(self):
+        return self._points
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def color(self):
+        return self._color
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Line data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;points&#39;: self._points,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;width&#39;: self._width,
+            &#39;color&#39;: self._color,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Line data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = LineData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;points&#39; in jsonDict:
+            point = jsonDict[&#39;points&#39;]
+            for i in point:
+                data._points.append(PointsData.fromJson(json.dumps(i)))
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;width&#39; in jsonDict:
+            data._width = jsonDict[&#39;width&#39;]
+        if &#39;color&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+            data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        return data</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="app.models.OverlayItems.OverlayItem" href="#app.models.OverlayItems.OverlayItem">OverlayItem</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.LineData.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Line data from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Line data from [jsonString].&#34;&#34;&#34;
+    jsonDict = json.loads(jsonString)
+    data = LineData()
+    if &#39;id&#39; in jsonDict:
+        data._id = jsonDict[&#39;id&#39;]
+    if &#39;points&#39; in jsonDict:
+        point = jsonDict[&#39;points&#39;]
+        for i in point:
+            data._points.append(PointsData.fromJson(json.dumps(i)))
+    if &#39;title&#39; in jsonDict:
+        data._title = jsonDict[&#39;title&#39;]
+    if &#39;desc&#39; in jsonDict:
+        data._desc = jsonDict[&#39;desc&#39;]
+    if &#39;width&#39; in jsonDict:
+        data._width = jsonDict[&#39;width&#39;]
+    if &#39;color&#39; in jsonDict:
+        color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+        data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+    return data</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="app.models.OverlayItems.LineData.color"><code class="name">var <span class="ident">color</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def color(self):
+    return self._color</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.LineData.desc"><code class="name">var <span class="ident">desc</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def desc(self):
+    return self._desc</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.LineData.points"><code class="name">var <span class="ident">points</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def points(self):
+    return self._points</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.LineData.title"><code class="name">var <span class="ident">title</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def title(self):
+    return self._title</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.LineData.width"><code class="name">var <span class="ident">width</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def width(self):
+    return self._width</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.LineData.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get JSON string from Line data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Line data.&#34;&#34;&#34;
+    return json.dumps({
+        &#39;id&#39;: self._id,
+        &#39;points&#39;: self._points,
+        &#39;title&#39;: self._title,
+        &#39;desc&#39;: self._desc,
+        &#39;width&#39;: self._width,
+        &#39;color&#39;: self._color,
+    })</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="app.models.OverlayItems.OverlayItem"><code class="flex name class">
+<span>class <span class="ident">OverlayItem</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Model class for Overlay items.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class OverlayItem(ABC):
+    &#34;&#34;&#34;Model class for Overlay items.&#34;&#34;&#34;
+
+    @abstractmethod
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Overlay item.&#34;&#34;&#34;
+        pass
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Overlay items from [jsonString].&#34;&#34;&#34;
+        if jsonString[&#39;type&#39;] == (&#39;Placemark&#39;):
+            return PlacemarkData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Line&#39;):
+            return LineData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Polygon&#39;):
+            return PolygonData.fromJson(json.dumps(jsonString))
+        elif jsonString[&#39;type&#39;] == (&#39;Image&#39;):
+            return ImageData.fromJson(json.dumps(jsonString))
+        return None</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="app.models.OverlayItems.PlacemarkData" href="#app.models.OverlayItems.PlacemarkData">PlacemarkData</a></li>
+<li><a title="app.models.OverlayItems.LineData" href="#app.models.OverlayItems.LineData">LineData</a></li>
+<li><a title="app.models.OverlayItems.PolygonData" href="#app.models.OverlayItems.PolygonData">PolygonData</a></li>
+<li><a title="app.models.OverlayItems.ImageData" href="#app.models.OverlayItems.ImageData">ImageData</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.OverlayItem.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Overlay items from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Overlay items from [jsonString].&#34;&#34;&#34;
+    if jsonString[&#39;type&#39;] == (&#39;Placemark&#39;):
+        return PlacemarkData.fromJson(json.dumps(jsonString))
+    elif jsonString[&#39;type&#39;] == (&#39;Line&#39;):
+        return LineData.fromJson(json.dumps(jsonString))
+    elif jsonString[&#39;type&#39;] == (&#39;Polygon&#39;):
+        return PolygonData.fromJson(json.dumps(jsonString))
+    elif jsonString[&#39;type&#39;] == (&#39;Image&#39;):
+        return ImageData.fromJson(json.dumps(jsonString))
+    return None</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.OverlayItem.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get JSON string from Overlay item.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@abstractmethod
+def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Overlay item.&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData"><code class="flex name class">
+<span>class <span class="ident">PlacemarkData</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>Model class for Placemark data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class PlacemarkData(OverlayItem):
+    &#34;&#34;&#34;Model class for Placemark data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._latitude = 0.0
+        self._longitude = 0.0
+        self._zInd = 0.0
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._iconSize = 0
+        self._iconColor = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @property
+    def zIndex(self):
+        return self._zInd
+
+    @property
+    def iconSize(self):
+        return self._iconSize
+
+    @property
+    def iconColor(self):
+        return self._iconColor
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Placemark data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;point&#39;: self._latitude,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;iconSize&#39;: self._iconSize,
+            &#39;iconColor&#39;: self._iconColor,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Placemark data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PlacemarkData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;point&#39; in jsonDict:
+            point = jsonDict[&#39;point&#39;]
+            jsonPoint = json.loads(json.dumps(point))
+            data._latitude = jsonPoint[&#39;latitude&#39;]
+            data._longitude = jsonPoint[&#39;longitude&#39;]
+            data._zInd = jsonPoint[&#39;zInd&#39;]
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;iconSize&#39; in jsonDict:
+            data._iconSize = jsonDict[&#39;iconSize&#39;]
+        if &#39;iconColor&#39; in jsonDict:
+            color = &#39;00000000&#39;
+            if jsonDict[&#39;iconColor&#39;] == 0:
+                color = &#39;FF0000FF&#39;
+            elif jsonDict[&#39;iconColor&#39;] == 120:
+                color = &#39;FF00FF00&#39;
+            elif jsonDict[&#39;iconColor&#39;] == 240:
+                color = &#39;FFFF0000&#39;
+            data._iconColor = color
+        return data</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="app.models.OverlayItems.OverlayItem" href="#app.models.OverlayItems.OverlayItem">OverlayItem</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.PlacemarkData.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Placemark data from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Placemark data from [jsonString].&#34;&#34;&#34;
+    jsonDict = json.loads(jsonString)
+    data = PlacemarkData()
+    if &#39;id&#39; in jsonDict:
+        data._id = jsonDict[&#39;id&#39;]
+    if &#39;point&#39; in jsonDict:
+        point = jsonDict[&#39;point&#39;]
+        jsonPoint = json.loads(json.dumps(point))
+        data._latitude = jsonPoint[&#39;latitude&#39;]
+        data._longitude = jsonPoint[&#39;longitude&#39;]
+        data._zInd = jsonPoint[&#39;zInd&#39;]
+    if &#39;title&#39; in jsonDict:
+        data._title = jsonDict[&#39;title&#39;]
+    if &#39;desc&#39; in jsonDict:
+        data._desc = jsonDict[&#39;desc&#39;]
+    if &#39;iconSize&#39; in jsonDict:
+        data._iconSize = jsonDict[&#39;iconSize&#39;]
+    if &#39;iconColor&#39; in jsonDict:
+        color = &#39;00000000&#39;
+        if jsonDict[&#39;iconColor&#39;] == 0:
+            color = &#39;FF0000FF&#39;
+        elif jsonDict[&#39;iconColor&#39;] == 120:
+            color = &#39;FF00FF00&#39;
+        elif jsonDict[&#39;iconColor&#39;] == 240:
+            color = &#39;FFFF0000&#39;
+        data._iconColor = color
+    return data</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="app.models.OverlayItems.PlacemarkData.desc"><code class="name">var <span class="ident">desc</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def desc(self):
+    return self._desc</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.iconColor"><code class="name">var <span class="ident">iconColor</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def iconColor(self):
+    return self._iconColor</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.iconSize"><code class="name">var <span class="ident">iconSize</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def iconSize(self):
+    return self._iconSize</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.latitude"><code class="name">var <span class="ident">latitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def latitude(self):
+    return self._latitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.longitude"><code class="name">var <span class="ident">longitude</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def longitude(self):
+    return self._longitude</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.title"><code class="name">var <span class="ident">title</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def title(self):
+    return self._title</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PlacemarkData.zIndex"><code class="name">var <span class="ident">zIndex</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def zIndex(self):
+    return self._zInd</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.PlacemarkData.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get JSON string from Placemark data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Placemark data.&#34;&#34;&#34;
+    return json.dumps({
+        &#39;id&#39;: self._id,
+        &#39;point&#39;: self._latitude,
+        &#39;title&#39;: self._title,
+        &#39;desc&#39;: self._desc,
+        &#39;iconSize&#39;: self._iconSize,
+        &#39;iconColor&#39;: self._iconColor,
+    })</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData"><code class="flex name class">
+<span>class <span class="ident">PolygonData</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>Model class for Polygon data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class PolygonData(OverlayItem):
+    &#34;&#34;&#34;Model class for Polygon data.&#34;&#34;&#34;
+
+    def __init__(self):
+        self._id = &#34;&#34;
+        self._points = []
+        self._title = &#34;&#34;
+        self._desc = &#34;&#34;
+        self._width = 0
+        self._color = 0.0
+        self._strokeColor = 0.0
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def desc(self):
+        return self._desc
+
+    @property
+    def points(self):
+        return self._points
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def color(self):
+        return self._color
+
+    @property
+    def strokeColor(self):
+        return self._strokeColor
+
+    def toJson(self):
+        &#34;&#34;&#34;Get JSON string from Polygon data.&#34;&#34;&#34;
+        return json.dumps({
+            &#39;id&#39;: self._id,
+            &#39;points&#39;: self._points,
+            &#39;title&#39;: self._title,
+            &#39;desc&#39;: self._desc,
+            &#39;width&#39;: self._width,
+            &#39;color&#39;: self._color,
+            &#39;strokeColor&#39;: self._strokeColor,
+        })
+
+    @classmethod
+    def fromJson(cls, jsonString):
+        &#34;&#34;&#34;Get Polygon data from [jsonString].&#34;&#34;&#34;
+        jsonDict = json.loads(jsonString)
+        data = PolygonData()
+        if &#39;id&#39; in jsonDict:
+            data._id = jsonDict[&#39;id&#39;]
+        if &#39;points&#39; in jsonDict:
+            point = jsonDict[&#39;points&#39;]
+            for i in point:
+                data._points.append(PointsData.fromJson(json.dumps(i)))
+            data._points.append(PointsData.fromJson(json.dumps(point[0])))
+        if &#39;title&#39; in jsonDict:
+            data._title = jsonDict[&#39;title&#39;]
+        if &#39;desc&#39; in jsonDict:
+            data._desc = jsonDict[&#39;desc&#39;]
+        if &#39;width&#39; in jsonDict:
+            data._width = jsonDict[&#39;width&#39;]
+        if &#39;color&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+            data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        if &#39;strokeColor&#39; in jsonDict:
+            color_argb = hex(jsonDict[&#39;strokeColor&#39;])[2:]
+            data._strokeColor = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+        return data</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="app.models.OverlayItems.OverlayItem" href="#app.models.OverlayItems.OverlayItem">OverlayItem</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.PolygonData.fromJson"><code class="name flex">
+<span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get Polygon data from [jsonString].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def fromJson(cls, jsonString):
+    &#34;&#34;&#34;Get Polygon data from [jsonString].&#34;&#34;&#34;
+    jsonDict = json.loads(jsonString)
+    data = PolygonData()
+    if &#39;id&#39; in jsonDict:
+        data._id = jsonDict[&#39;id&#39;]
+    if &#39;points&#39; in jsonDict:
+        point = jsonDict[&#39;points&#39;]
+        for i in point:
+            data._points.append(PointsData.fromJson(json.dumps(i)))
+        data._points.append(PointsData.fromJson(json.dumps(point[0])))
+    if &#39;title&#39; in jsonDict:
+        data._title = jsonDict[&#39;title&#39;]
+    if &#39;desc&#39; in jsonDict:
+        data._desc = jsonDict[&#39;desc&#39;]
+    if &#39;width&#39; in jsonDict:
+        data._width = jsonDict[&#39;width&#39;]
+    if &#39;color&#39; in jsonDict:
+        color_argb = hex(jsonDict[&#39;color&#39;])[2:]
+        data._color = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+    if &#39;strokeColor&#39; in jsonDict:
+        color_argb = hex(jsonDict[&#39;strokeColor&#39;])[2:]
+        data._strokeColor = color_argb[0:2] + color_argb[6:8] + color_argb[4:6] + color_argb[2:4]
+    return data</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="app.models.OverlayItems.PolygonData.color"><code class="name">var <span class="ident">color</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def color(self):
+    return self._color</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData.desc"><code class="name">var <span class="ident">desc</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def desc(self):
+    return self._desc</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData.points"><code class="name">var <span class="ident">points</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def points(self):
+    return self._points</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData.strokeColor"><code class="name">var <span class="ident">strokeColor</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def strokeColor(self):
+    return self._strokeColor</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData.title"><code class="name">var <span class="ident">title</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def title(self):
+    return self._title</code></pre>
+</details>
+</dd>
+<dt id="app.models.OverlayItems.PolygonData.width"><code class="name">var <span class="ident">width</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def width(self):
+    return self._width</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="app.models.OverlayItems.PolygonData.toJson"><code class="name flex">
+<span>def <span class="ident">toJson</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Get JSON string from Polygon data.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def toJson(self):
+    &#34;&#34;&#34;Get JSON string from Polygon data.&#34;&#34;&#34;
+    return json.dumps({
+        &#39;id&#39;: self._id,
+        &#39;points&#39;: self._points,
+        &#39;title&#39;: self._title,
+        &#39;desc&#39;: self._desc,
+        &#39;width&#39;: self._width,
+        &#39;color&#39;: self._color,
+        &#39;strokeColor&#39;: self._strokeColor,
+    })</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="app.models" href="index.html">app.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="app.models.OverlayItems.ImageData" href="#app.models.OverlayItems.ImageData">ImageData</a></code></h4>
+<ul class="two-column">
+<li><code><a title="app.models.OverlayItems.ImageData.desc" href="#app.models.OverlayItems.ImageData.desc">desc</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.fromJson" href="#app.models.OverlayItems.ImageData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.image" href="#app.models.OverlayItems.ImageData.image">image</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.latitude" href="#app.models.OverlayItems.ImageData.latitude">latitude</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.longitude" href="#app.models.OverlayItems.ImageData.longitude">longitude</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.thumbnail" href="#app.models.OverlayItems.ImageData.thumbnail">thumbnail</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.title" href="#app.models.OverlayItems.ImageData.title">title</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.toJson" href="#app.models.OverlayItems.ImageData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.ImageData.zIndex" href="#app.models.OverlayItems.ImageData.zIndex">zIndex</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.models.OverlayItems.LineData" href="#app.models.OverlayItems.LineData">LineData</a></code></h4>
+<ul class="two-column">
+<li><code><a title="app.models.OverlayItems.LineData.color" href="#app.models.OverlayItems.LineData.color">color</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.desc" href="#app.models.OverlayItems.LineData.desc">desc</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.fromJson" href="#app.models.OverlayItems.LineData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.points" href="#app.models.OverlayItems.LineData.points">points</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.title" href="#app.models.OverlayItems.LineData.title">title</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.toJson" href="#app.models.OverlayItems.LineData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.LineData.width" href="#app.models.OverlayItems.LineData.width">width</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.models.OverlayItems.OverlayItem" href="#app.models.OverlayItems.OverlayItem">OverlayItem</a></code></h4>
+<ul class="">
+<li><code><a title="app.models.OverlayItems.OverlayItem.fromJson" href="#app.models.OverlayItems.OverlayItem.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.OverlayItem.toJson" href="#app.models.OverlayItems.OverlayItem.toJson">toJson</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.models.OverlayItems.PlacemarkData" href="#app.models.OverlayItems.PlacemarkData">PlacemarkData</a></code></h4>
+<ul class="two-column">
+<li><code><a title="app.models.OverlayItems.PlacemarkData.desc" href="#app.models.OverlayItems.PlacemarkData.desc">desc</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.fromJson" href="#app.models.OverlayItems.PlacemarkData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.iconColor" href="#app.models.OverlayItems.PlacemarkData.iconColor">iconColor</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.iconSize" href="#app.models.OverlayItems.PlacemarkData.iconSize">iconSize</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.latitude" href="#app.models.OverlayItems.PlacemarkData.latitude">latitude</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.longitude" href="#app.models.OverlayItems.PlacemarkData.longitude">longitude</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.title" href="#app.models.OverlayItems.PlacemarkData.title">title</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.toJson" href="#app.models.OverlayItems.PlacemarkData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.PlacemarkData.zIndex" href="#app.models.OverlayItems.PlacemarkData.zIndex">zIndex</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="app.models.OverlayItems.PolygonData" href="#app.models.OverlayItems.PolygonData">PolygonData</a></code></h4>
+<ul class="two-column">
+<li><code><a title="app.models.OverlayItems.PolygonData.color" href="#app.models.OverlayItems.PolygonData.color">color</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.desc" href="#app.models.OverlayItems.PolygonData.desc">desc</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.fromJson" href="#app.models.OverlayItems.PolygonData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.points" href="#app.models.OverlayItems.PolygonData.points">points</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.strokeColor" href="#app.models.OverlayItems.PolygonData.strokeColor">strokeColor</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.title" href="#app.models.OverlayItems.PolygonData.title">title</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.toJson" href="#app.models.OverlayItems.PolygonData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.OverlayItems.PolygonData.width" href="#app.models.OverlayItems.PolygonData.width">width</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.3</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

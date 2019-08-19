@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.3" />
-<title>app.models.KMLData API documentation</title>
+<title>app.models.TourData API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,7 +17,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>app.models.KMLData</code></h1>
+<h1 class="title">Module <code>app.models.TourData</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -25,8 +25,8 @@
 <pre><code class="python">import json
 
 
-class KMLData:
-    &#34;&#34;&#34;Model class for KML data.&#34;&#34;&#34;
+class TourData:
+    &#34;&#34;&#34;Model class for Tour data.&#34;&#34;&#34;
 
     def __init__(self):
         self._title = &#34;&#34;
@@ -36,6 +36,7 @@ class KMLData:
         self._bearing = 0.0
         self._zoom = 0.0
         self._tilt = 0.0
+        self._fileID = &#34;&#34;
 
     @property
     def title(self):
@@ -65,8 +66,12 @@ class KMLData:
     def tilt(self):
         return self._tilt
 
+    @property
+    def fileID(self):
+        return self._fileID
+
     def toJson(self):
-        &#34;&#34;&#34;Get JSON string from KML data.&#34;&#34;&#34;
+        &#34;&#34;&#34;Get JSON string from Tour data.&#34;&#34;&#34;
         return json.dumps({
             &#39;title&#39;: self._title,
             &#39;desc&#39;: self._desc,
@@ -75,13 +80,14 @@ class KMLData:
             &#39;bearing&#39;: self._bearing,
             &#39;zoom&#39;: self._zoom,
             &#39;tilt&#39;: self._tilt,
+            &#39;fileID&#39;: self._fileID,
         })
 
     @classmethod
     def fromJson(cls, jsonString):
-        &#34;&#34;&#34;Get KML data from [jsonString].&#34;&#34;&#34;
+        &#34;&#34;&#34;Get Tour data from [jsonString].&#34;&#34;&#34;
         jsonDict = json.loads(jsonString)
-        data = KMLData()
+        data = TourData()
         if &#39;title&#39; in jsonDict:
             data._title = jsonDict[&#39;title&#39;]
         if &#39;desc&#39; in jsonDict:
@@ -96,6 +102,8 @@ class KMLData:
             data._zoom = jsonDict[&#39;zoom&#39;]
         if &#39;tilt&#39; in jsonDict:
             data._tilt = jsonDict[&#39;tilt&#39;]
+        if &#39;fileID&#39; in jsonDict:
+            data._fileID = jsonDict[&#39;fileID&#39;]
         return data</code></pre>
 </details>
 </section>
@@ -108,15 +116,15 @@ class KMLData:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="app.models.KMLData.KMLData"><code class="flex name class">
-<span>class <span class="ident">KMLData</span></span>
+<dt id="app.models.TourData.TourData"><code class="flex name class">
+<span>class <span class="ident">TourData</span></span>
 </code></dt>
 <dd>
-<section class="desc"><p>Model class for KML data.</p></section>
+<section class="desc"><p>Model class for Tour data.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class KMLData:
-    &#34;&#34;&#34;Model class for KML data.&#34;&#34;&#34;
+<pre><code class="python">class TourData:
+    &#34;&#34;&#34;Model class for Tour data.&#34;&#34;&#34;
 
     def __init__(self):
         self._title = &#34;&#34;
@@ -126,6 +134,7 @@ class KMLData:
         self._bearing = 0.0
         self._zoom = 0.0
         self._tilt = 0.0
+        self._fileID = &#34;&#34;
 
     @property
     def title(self):
@@ -155,8 +164,12 @@ class KMLData:
     def tilt(self):
         return self._tilt
 
+    @property
+    def fileID(self):
+        return self._fileID
+
     def toJson(self):
-        &#34;&#34;&#34;Get JSON string from KML data.&#34;&#34;&#34;
+        &#34;&#34;&#34;Get JSON string from Tour data.&#34;&#34;&#34;
         return json.dumps({
             &#39;title&#39;: self._title,
             &#39;desc&#39;: self._desc,
@@ -165,13 +178,14 @@ class KMLData:
             &#39;bearing&#39;: self._bearing,
             &#39;zoom&#39;: self._zoom,
             &#39;tilt&#39;: self._tilt,
+            &#39;fileID&#39;: self._fileID,
         })
 
     @classmethod
     def fromJson(cls, jsonString):
-        &#34;&#34;&#34;Get KML data from [jsonString].&#34;&#34;&#34;
+        &#34;&#34;&#34;Get Tour data from [jsonString].&#34;&#34;&#34;
         jsonDict = json.loads(jsonString)
-        data = KMLData()
+        data = TourData()
         if &#39;title&#39; in jsonDict:
             data._title = jsonDict[&#39;title&#39;]
         if &#39;desc&#39; in jsonDict:
@@ -186,26 +200,24 @@ class KMLData:
             data._zoom = jsonDict[&#39;zoom&#39;]
         if &#39;tilt&#39; in jsonDict:
             data._tilt = jsonDict[&#39;tilt&#39;]
+        if &#39;fileID&#39; in jsonDict:
+            data._fileID = jsonDict[&#39;fileID&#39;]
         return data</code></pre>
 </details>
-<h3>Subclasses</h3>
-<ul class="hlist">
-<li><a title="app.models.OverlayData.OverlayData" href="OverlayData.html#app.models.OverlayData.OverlayData">OverlayData</a></li>
-</ul>
 <h3>Static methods</h3>
 <dl>
-<dt id="app.models.KMLData.KMLData.fromJson"><code class="name flex">
+<dt id="app.models.TourData.TourData.fromJson"><code class="name flex">
 <span>def <span class="ident">fromJson</span></span>(<span>jsonString)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Get KML data from [jsonString].</p></section>
+<section class="desc"><p>Get Tour data from [jsonString].</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
 def fromJson(cls, jsonString):
-    &#34;&#34;&#34;Get KML data from [jsonString].&#34;&#34;&#34;
+    &#34;&#34;&#34;Get Tour data from [jsonString].&#34;&#34;&#34;
     jsonDict = json.loads(jsonString)
-    data = KMLData()
+    data = TourData()
     if &#39;title&#39; in jsonDict:
         data._title = jsonDict[&#39;title&#39;]
     if &#39;desc&#39; in jsonDict:
@@ -220,13 +232,15 @@ def fromJson(cls, jsonString):
         data._zoom = jsonDict[&#39;zoom&#39;]
     if &#39;tilt&#39; in jsonDict:
         data._tilt = jsonDict[&#39;tilt&#39;]
+    if &#39;fileID&#39; in jsonDict:
+        data._fileID = jsonDict[&#39;fileID&#39;]
     return data</code></pre>
 </details>
 </dd>
 </dl>
 <h3>Instance variables</h3>
 <dl>
-<dt id="app.models.KMLData.KMLData.bearing"><code class="name">var <span class="ident">bearing</span></code></dt>
+<dt id="app.models.TourData.TourData.bearing"><code class="name">var <span class="ident">bearing</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -236,7 +250,7 @@ def bearing(self):
     return self._bearing</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.description"><code class="name">var <span class="ident">description</span></code></dt>
+<dt id="app.models.TourData.TourData.description"><code class="name">var <span class="ident">description</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -246,7 +260,17 @@ def description(self):
     return self._desc</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.latitude"><code class="name">var <span class="ident">latitude</span></code></dt>
+<dt id="app.models.TourData.TourData.fileID"><code class="name">var <span class="ident">fileID</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@property
+def fileID(self):
+    return self._fileID</code></pre>
+</details>
+</dd>
+<dt id="app.models.TourData.TourData.latitude"><code class="name">var <span class="ident">latitude</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -256,7 +280,7 @@ def latitude(self):
     return self._latitude</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.longitude"><code class="name">var <span class="ident">longitude</span></code></dt>
+<dt id="app.models.TourData.TourData.longitude"><code class="name">var <span class="ident">longitude</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -266,7 +290,7 @@ def longitude(self):
     return self._longitude</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.tilt"><code class="name">var <span class="ident">tilt</span></code></dt>
+<dt id="app.models.TourData.TourData.tilt"><code class="name">var <span class="ident">tilt</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -276,7 +300,7 @@ def tilt(self):
     return self._tilt</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.title"><code class="name">var <span class="ident">title</span></code></dt>
+<dt id="app.models.TourData.TourData.title"><code class="name">var <span class="ident">title</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -286,7 +310,7 @@ def title(self):
     return self._title</code></pre>
 </details>
 </dd>
-<dt id="app.models.KMLData.KMLData.zoom"><code class="name">var <span class="ident">zoom</span></code></dt>
+<dt id="app.models.TourData.TourData.zoom"><code class="name">var <span class="ident">zoom</span></code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
@@ -299,15 +323,15 @@ def zoom(self):
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="app.models.KMLData.KMLData.toJson"><code class="name flex">
+<dt id="app.models.TourData.TourData.toJson"><code class="name flex">
 <span>def <span class="ident">toJson</span></span>(<span>self)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Get JSON string from KML data.</p></section>
+<section class="desc"><p>Get JSON string from Tour data.</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def toJson(self):
-    &#34;&#34;&#34;Get JSON string from KML data.&#34;&#34;&#34;
+    &#34;&#34;&#34;Get JSON string from Tour data.&#34;&#34;&#34;
     return json.dumps({
         &#39;title&#39;: self._title,
         &#39;desc&#39;: self._desc,
@@ -316,6 +340,7 @@ def zoom(self):
         &#39;bearing&#39;: self._bearing,
         &#39;zoom&#39;: self._zoom,
         &#39;tilt&#39;: self._tilt,
+        &#39;fileID&#39;: self._fileID,
     })</code></pre>
 </details>
 </dd>
@@ -338,17 +363,18 @@ def zoom(self):
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="app.models.KMLData.KMLData" href="#app.models.KMLData.KMLData">KMLData</a></code></h4>
+<h4><code><a title="app.models.TourData.TourData" href="#app.models.TourData.TourData">TourData</a></code></h4>
 <ul class="two-column">
-<li><code><a title="app.models.KMLData.KMLData.bearing" href="#app.models.KMLData.KMLData.bearing">bearing</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.description" href="#app.models.KMLData.KMLData.description">description</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.fromJson" href="#app.models.KMLData.KMLData.fromJson">fromJson</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.latitude" href="#app.models.KMLData.KMLData.latitude">latitude</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.longitude" href="#app.models.KMLData.KMLData.longitude">longitude</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.tilt" href="#app.models.KMLData.KMLData.tilt">tilt</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.title" href="#app.models.KMLData.KMLData.title">title</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.toJson" href="#app.models.KMLData.KMLData.toJson">toJson</a></code></li>
-<li><code><a title="app.models.KMLData.KMLData.zoom" href="#app.models.KMLData.KMLData.zoom">zoom</a></code></li>
+<li><code><a title="app.models.TourData.TourData.bearing" href="#app.models.TourData.TourData.bearing">bearing</a></code></li>
+<li><code><a title="app.models.TourData.TourData.description" href="#app.models.TourData.TourData.description">description</a></code></li>
+<li><code><a title="app.models.TourData.TourData.fileID" href="#app.models.TourData.TourData.fileID">fileID</a></code></li>
+<li><code><a title="app.models.TourData.TourData.fromJson" href="#app.models.TourData.TourData.fromJson">fromJson</a></code></li>
+<li><code><a title="app.models.TourData.TourData.latitude" href="#app.models.TourData.TourData.latitude">latitude</a></code></li>
+<li><code><a title="app.models.TourData.TourData.longitude" href="#app.models.TourData.TourData.longitude">longitude</a></code></li>
+<li><code><a title="app.models.TourData.TourData.tilt" href="#app.models.TourData.TourData.tilt">tilt</a></code></li>
+<li><code><a title="app.models.TourData.TourData.title" href="#app.models.TourData.TourData.title">title</a></code></li>
+<li><code><a title="app.models.TourData.TourData.toJson" href="#app.models.TourData.TourData.toJson">toJson</a></code></li>
+<li><code><a title="app.models.TourData.TourData.zoom" href="#app.models.TourData.TourData.zoom">zoom</a></code></li>
 </ul>
 </li>
 </ul>

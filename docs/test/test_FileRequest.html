@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.3" />
-<title>test.test_OSCSender API documentation</title>
+<title>test.test_FileRequest API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,33 +17,42 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>test.test_OSCSender</code></h1>
+<h1 class="title">Module <code>test.test_FileRequest</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">import socket
-import unittest
+<pre><code class="python">import unittest
+from pathlib import Path
 from unittest.mock import patch
+from unittest.mock import Mock
+from googleapiclient.http import HttpRequest
+from googleapiclient.http import MediaIoBaseDownload
+from app.gdrive.FileRequests import FileRequests
+from app.utils.KMLUtils import KMLUtils
 
-from app.controller.ModuleType import ModuleType
-from app.controller.FeedbackSender import FeedbackSender
 
+class FileRequestTest(unittest.TestCase):
+    &#34;&#34;&#34;Tests for Google Drive functionalities.&#34;&#34;&#34;
 
-class OSCSenderTest(unittest.TestCase):
-    &#34;&#34;&#34;Tests for OSC sender.&#34;&#34;&#34;
+    @patch(&#39;app.gdrive.FileRequests.ServiceAccountCredentials&#39;)
+    @patch(&#39;app.gdrive.FileRequests.build&#39;)
+    @patch(&#39;app.gdrive.FileRequests.MediaIoBaseDownload&#39;)
+    def test_authorizeUserAndDownload(self, mock_downloader, mock_builder, mock_serviceAcc):
+        mock_serviceAcc.from_json_keyfile_name.return_value = 0
 
-    @patch(&#39;app.controller.FeedbackSender.SimpleUDPClient&#39;)
-    @patch(&#39;app.controller.FeedbackSender.ServerValidation&#39;)
-    def test_Sender(self, mock_validator, mock_client):
-        mock_validator.getInstance.return_value = mock_validator.return_value
-        mock_validator.return_value.id_lg = 0
-        mock_validator.return_value.port = 90
-        mock_validator.return_value.ipaddress = socket.gethostbyname(socket.getfqdn())
-        mock_validator.return_value.basePath = &#39;/test&#39;
-        FeedbackSender.getInstance().sendMessage(ModuleType.EXIT, &#39;test&#39;)
-        mock_validator.getInstance.assert_called_once()
-        mock_client.return_value.send.assert_called_once()</code></pre>
+        fr = FileRequests.getInstance()
+        mock_serviceAcc.from_json_keyfile_name.assert_called_once()
+        mock_builder.assert_called_once()
+        mock_builder.assert_called_once_with(&#39;drive&#39;, &#39;v3&#39;, credentials=0)
+
+        mock_builder.return_value.files.return_value.get_media.return_value = 0
+        mock_downloader.return_value.next_chunk.return_value = True
+
+        fr.downloadFile(&#39;fileID&#39;)
+        mock_builder.return_value.files.return_value.get_media.assert_called_once()
+        mock_downloader.return_value.next_chunk.assert_called_once_with()
+        self.assertEqual(Path(KMLUtils.getFilePath()).exists(), True)</code></pre>
 </details>
 </section>
 <section>
@@ -55,31 +64,38 @@ class OSCSenderTest(unittest.TestCase):
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="test.test_OSCSender.OSCSenderTest"><code class="flex name class">
-<span>class <span class="ident">OSCSenderTest</span></span>
+<dt id="test.test_FileRequest.FileRequestTest"><code class="flex name class">
+<span>class <span class="ident">FileRequestTest</span></span>
 <span>(</span><span>methodName='runTest')</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Tests for OSC sender.</p>
+<section class="desc"><p>Tests for Google Drive functionalities.</p>
 <p>Create an instance of the class that will use the named test
 method when executed. Raises a ValueError if the instance does
 not have a method with the specified name.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class OSCSenderTest(unittest.TestCase):
-    &#34;&#34;&#34;Tests for OSC sender.&#34;&#34;&#34;
+<pre><code class="python">class FileRequestTest(unittest.TestCase):
+    &#34;&#34;&#34;Tests for Google Drive functionalities.&#34;&#34;&#34;
 
-    @patch(&#39;app.controller.FeedbackSender.SimpleUDPClient&#39;)
-    @patch(&#39;app.controller.FeedbackSender.ServerValidation&#39;)
-    def test_Sender(self, mock_validator, mock_client):
-        mock_validator.getInstance.return_value = mock_validator.return_value
-        mock_validator.return_value.id_lg = 0
-        mock_validator.return_value.port = 90
-        mock_validator.return_value.ipaddress = socket.gethostbyname(socket.getfqdn())
-        mock_validator.return_value.basePath = &#39;/test&#39;
-        FeedbackSender.getInstance().sendMessage(ModuleType.EXIT, &#39;test&#39;)
-        mock_validator.getInstance.assert_called_once()
-        mock_client.return_value.send.assert_called_once()</code></pre>
+    @patch(&#39;app.gdrive.FileRequests.ServiceAccountCredentials&#39;)
+    @patch(&#39;app.gdrive.FileRequests.build&#39;)
+    @patch(&#39;app.gdrive.FileRequests.MediaIoBaseDownload&#39;)
+    def test_authorizeUserAndDownload(self, mock_downloader, mock_builder, mock_serviceAcc):
+        mock_serviceAcc.from_json_keyfile_name.return_value = 0
+
+        fr = FileRequests.getInstance()
+        mock_serviceAcc.from_json_keyfile_name.assert_called_once()
+        mock_builder.assert_called_once()
+        mock_builder.assert_called_once_with(&#39;drive&#39;, &#39;v3&#39;, credentials=0)
+
+        mock_builder.return_value.files.return_value.get_media.return_value = 0
+        mock_downloader.return_value.next_chunk.return_value = True
+
+        fr.downloadFile(&#39;fileID&#39;)
+        mock_builder.return_value.files.return_value.get_media.assert_called_once()
+        mock_downloader.return_value.next_chunk.assert_called_once_with()
+        self.assertEqual(Path(KMLUtils.getFilePath()).exists(), True)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -87,24 +103,31 @@ not have a method with the specified name.</p></section>
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="test.test_OSCSender.OSCSenderTest.test_Sender"><code class="name flex">
-<span>def <span class="ident">test_Sender</span></span>(<span>self, mock_validator, mock_client)</span>
+<dt id="test.test_FileRequest.FileRequestTest.test_authorizeUserAndDownload"><code class="name flex">
+<span>def <span class="ident">test_authorizeUserAndDownload</span></span>(<span>self, mock_downloader, mock_builder, mock_serviceAcc)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@patch(&#39;app.controller.FeedbackSender.SimpleUDPClient&#39;)
-@patch(&#39;app.controller.FeedbackSender.ServerValidation&#39;)
-def test_Sender(self, mock_validator, mock_client):
-    mock_validator.getInstance.return_value = mock_validator.return_value
-    mock_validator.return_value.id_lg = 0
-    mock_validator.return_value.port = 90
-    mock_validator.return_value.ipaddress = socket.gethostbyname(socket.getfqdn())
-    mock_validator.return_value.basePath = &#39;/test&#39;
-    FeedbackSender.getInstance().sendMessage(ModuleType.EXIT, &#39;test&#39;)
-    mock_validator.getInstance.assert_called_once()
-    mock_client.return_value.send.assert_called_once()</code></pre>
+<pre><code class="python">@patch(&#39;app.gdrive.FileRequests.ServiceAccountCredentials&#39;)
+@patch(&#39;app.gdrive.FileRequests.build&#39;)
+@patch(&#39;app.gdrive.FileRequests.MediaIoBaseDownload&#39;)
+def test_authorizeUserAndDownload(self, mock_downloader, mock_builder, mock_serviceAcc):
+    mock_serviceAcc.from_json_keyfile_name.return_value = 0
+
+    fr = FileRequests.getInstance()
+    mock_serviceAcc.from_json_keyfile_name.assert_called_once()
+    mock_builder.assert_called_once()
+    mock_builder.assert_called_once_with(&#39;drive&#39;, &#39;v3&#39;, credentials=0)
+
+    mock_builder.return_value.files.return_value.get_media.return_value = 0
+    mock_downloader.return_value.next_chunk.return_value = True
+
+    fr.downloadFile(&#39;fileID&#39;)
+    mock_builder.return_value.files.return_value.get_media.assert_called_once()
+    mock_downloader.return_value.next_chunk.assert_called_once_with()
+    self.assertEqual(Path(KMLUtils.getFilePath()).exists(), True)</code></pre>
 </details>
 </dd>
 </dl>
@@ -126,9 +149,9 @@ def test_Sender(self, mock_validator, mock_client):
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="test.test_OSCSender.OSCSenderTest" href="#test.test_OSCSender.OSCSenderTest">OSCSenderTest</a></code></h4>
+<h4><code><a title="test.test_FileRequest.FileRequestTest" href="#test.test_FileRequest.FileRequestTest">FileRequestTest</a></code></h4>
 <ul class="">
-<li><code><a title="test.test_OSCSender.OSCSenderTest.test_Sender" href="#test.test_OSCSender.OSCSenderTest.test_Sender">test_Sender</a></code></li>
+<li><code><a title="test.test_FileRequest.FileRequestTest.test_authorizeUserAndDownload" href="#test.test_FileRequest.FileRequestTest.test_authorizeUserAndDownload">test_authorizeUserAndDownload</a></code></li>
 </ul>
 </li>
 </ul>

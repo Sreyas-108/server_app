@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.3" />
-<title>test API documentation</title>
+<title>app.tours.GenerateKML API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,46 +17,68 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>test</code></h1>
+<h1 class="title">Module <code>app.tours.GenerateKML</code></h1>
 </header>
 <section id="section-intro">
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">import requests
+
+from app.controller.FeedbackSender import FeedbackSender
+from app.controller.ModuleType import ModuleType
+from app.gdrive.FileRequests import FileRequests
+from app.utils.DeployUtils import DeployUtils
+from app.utils.KMLUtils import KMLUtils
+from app.utils.LogUtils import LogUtils
+
+
+def generateTour(data, ip):
+    &#34;&#34;&#34;Generate KML file for tour [data].&#34;&#34;&#34;
+    LogUtils.writeInfo(&#34;KML generation for tour.&#34;)
+    try:
+        fr = FileRequests.getInstance()
+        if fr is not None:
+            fr.downloadFile(data.fileID)
+            multipart_form_data = {&#39;kml&#39;: (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), &#39;r&#39;))}
+            requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
+        else:
+            LogUtils.writeWarning(&#34;Authorization for drive access failure.&#34;)
+    except Exception as e:
+        LogUtils.writeWarning(&#34;KML generation for tour failure : &#34; + str(e))
+        FeedbackSender.getInstance().sendMessage(ModuleType.TOUR, &#34;KML generation for tour failure.&#34;)</code></pre>
+</details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="test.test_FileRequest" href="test_FileRequest.html">test.test_FileRequest</a></code></dt>
+<dt id="app.tours.GenerateKML.generateTour"><code class="name flex">
+<span>def <span class="ident">generateTour</span></span>(<span>data, ip)</span>
+</code></dt>
 <dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_OSCSender" href="test_OSCSender.html">test.test_OSCSender</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_OSCServer" href="test_OSCServer.html">test.test_OSCServer</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_generateKML" href="test_generateKML.html">test.test_generateKML</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_handler" href="test_handler.html">test.test_handler</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_initApp" href="test_initApp.html">test.test_initApp</a></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt><code class="name"><a title="test.test_utils" href="test_utils.html">test.test_utils</a></code></dt>
-<dd>
-<section class="desc"></section>
+<section class="desc"><p>Generate KML file for tour [data].</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def generateTour(data, ip):
+    &#34;&#34;&#34;Generate KML file for tour [data].&#34;&#34;&#34;
+    LogUtils.writeInfo(&#34;KML generation for tour.&#34;)
+    try:
+        fr = FileRequests.getInstance()
+        if fr is not None:
+            fr.downloadFile(data.fileID)
+            multipart_form_data = {&#39;kml&#39;: (KMLUtils.getFilePath(), open(KMLUtils.getFilePath(), &#39;r&#39;))}
+            requests.post(DeployUtils.getURL(ip), files=multipart_form_data)
+        else:
+            LogUtils.writeWarning(&#34;Authorization for drive access failure.&#34;)
+    except Exception as e:
+        LogUtils.writeWarning(&#34;KML generation for tour failure : &#34; + str(e))
+        FeedbackSender.getInstance().sendMessage(ModuleType.TOUR, &#34;KML generation for tour failure.&#34;)</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -67,15 +89,14 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="test.test_FileRequest" href="test_FileRequest.html">test.test_FileRequest</a></code></li>
-<li><code><a title="test.test_OSCSender" href="test_OSCSender.html">test.test_OSCSender</a></code></li>
-<li><code><a title="test.test_OSCServer" href="test_OSCServer.html">test.test_OSCServer</a></code></li>
-<li><code><a title="test.test_generateKML" href="test_generateKML.html">test.test_generateKML</a></code></li>
-<li><code><a title="test.test_handler" href="test_handler.html">test.test_handler</a></code></li>
-<li><code><a title="test.test_initApp" href="test_initApp.html">test.test_initApp</a></code></li>
-<li><code><a title="test.test_utils" href="test_utils.html">test.test_utils</a></code></li>
+<li><code><a title="app.tours" href="index.html">app.tours</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="app.tours.GenerateKML.generateTour" href="#app.tours.GenerateKML.generateTour">generateTour</a></code></li>
 </ul>
 </li>
 </ul>

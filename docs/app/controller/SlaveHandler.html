@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.3" />
-<title>app.controller.OSCSender API documentation</title>
+<title>app.controller.SlaveHandler API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,48 +17,69 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>app.controller.OSCSender</code></h1>
+<h1 class="title">Module <code>app.controller.SlaveHandler</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">from pythonosc import osc_bundle_builder
-from pythonosc import osc_message_builder
-from pythonosc.udp_client import SimpleUDPClient
-
-from app.controller.Validation import ServerValidation
+<pre><code class="python">from app.controller.OSCSender import OSCSender
 
 
-class OSCSender:
-    &#34;&#34;&#34;OSC sender functionalities.&#34;&#34;&#34;
+class SlaveHandler:
+    &#34;&#34;&#34;Handles slave instances.&#34;&#34;&#34;
     __instance = None
-    __servervalidation = None
+    __isMaster = True
+    __sender = None
 
     @staticmethod
     def getInstance():
-        &#34;&#34;&#34;Get the singleton instance of [OSCSender].&#34;&#34;&#34;
-        if OSCSender.__instance is None:
-            OSCSender()
-        return OSCSender.__instance
+        &#34;&#34;&#34;Get the singleton instance of [SlaveHandler].&#34;&#34;&#34;
+        if SlaveHandler.__instance is None:
+            SlaveHandler()
+        return SlaveHandler.__instance
 
     def __init__(self):
-        OSCSender.__instance = self
-        self.__servervalidation = ServerValidation.getInstance()
+        SlaveHandler.__instance = self
+        self.__isMaster = True
+        if self.__isMaster is True:
+            self.__numOfSlaves = 0
+            self.__slaves = self._getIP()
+            self.__sender = OSCSender.getInstance()
 
-    def sendMessage(self, mod_type, data, disp, ip=None):
-        &#34;&#34;&#34;Send OSC message with [data] to the given socket and ip address.&#34;&#34;&#34;
-        ip = ip or self.__servervalidation.ipaddress
-        client = SimpleUDPClient(ip,
-                                 self.__servervalidation.port + disp)
+    def sendMessage(self, mod_type, data):
+        &#34;&#34;&#34;Send OSC message with [data] to the slave instances if it is a master machine.&#34;&#34;&#34;
+        if self.__isMaster is False:
+            return
+        for ip in self.__slaves:
+            self.__sender.sendMessage(mod_type, data, 0, ip=ip)
 
-        bundle = osc_bundle_builder.OscBundleBuilder(osc_bundle_builder.IMMEDIATELY)
-        msg = osc_message_builder.OscMessageBuilder(address=self.__servervalidation.basePath + mod_type.value[1])
-        msg.add_arg(self.__servervalidation.id_lg)
-        msg.add_arg(mod_type.value[0])
-        msg.add_arg(data)
-        bundle.add_content(msg.build())
-        bundle = bundle.build()
-        client.send(bundle)</code></pre>
+    def _getSlaves(self):
+        &#34;&#34;&#34;Get number of slaves to be used from user. Default is 0.&#34;&#34;&#34;
+        print(&#34;Enter the number of slaves to be used : &#34;)
+        try:
+            return int(input())
+        except:
+            return 0
+
+    def _isMaster(self):
+        &#34;&#34;&#34;Get machine number from user. Default machine number is 0(master).&#34;&#34;&#34;
+        print(&#34;Enter machine number (0 =&gt; master, &gt;0 =&gt; slave) : &#34;)
+        try:
+            return int(input())
+        except:
+            return 0
+
+    def _getIP(self):
+        &#34;&#34;&#34;Get IP address of slaves to be used from user.&#34;&#34;&#34;
+        ip = []
+        for i in range(self.__numOfSlaves):
+            print(&#34;Enter IP address of &#34; + str(i + 1) + &#34; slave : &#34;)
+            try:
+                ip.append(input())
+            except:
+                print(&#39;Invalid IP address. Please re-configure completely.&#39;)
+
+        return ip</code></pre>
 </details>
 </section>
 <section>
@@ -70,85 +91,102 @@ class OSCSender:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="app.controller.OSCSender.OSCSender"><code class="flex name class">
-<span>class <span class="ident">OSCSender</span></span>
+<dt id="app.controller.SlaveHandler.SlaveHandler"><code class="flex name class">
+<span>class <span class="ident">SlaveHandler</span></span>
 </code></dt>
 <dd>
-<section class="desc"><p>OSC sender functionalities.</p></section>
+<section class="desc"><p>Handles slave instances.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class OSCSender:
-    &#34;&#34;&#34;OSC sender functionalities.&#34;&#34;&#34;
+<pre><code class="python">class SlaveHandler:
+    &#34;&#34;&#34;Handles slave instances.&#34;&#34;&#34;
     __instance = None
-    __servervalidation = None
+    __isMaster = True
+    __sender = None
 
     @staticmethod
     def getInstance():
-        &#34;&#34;&#34;Get the singleton instance of [OSCSender].&#34;&#34;&#34;
-        if OSCSender.__instance is None:
-            OSCSender()
-        return OSCSender.__instance
+        &#34;&#34;&#34;Get the singleton instance of [SlaveHandler].&#34;&#34;&#34;
+        if SlaveHandler.__instance is None:
+            SlaveHandler()
+        return SlaveHandler.__instance
 
     def __init__(self):
-        OSCSender.__instance = self
-        self.__servervalidation = ServerValidation.getInstance()
+        SlaveHandler.__instance = self
+        self.__isMaster = True
+        if self.__isMaster is True:
+            self.__numOfSlaves = 0
+            self.__slaves = self._getIP()
+            self.__sender = OSCSender.getInstance()
 
-    def sendMessage(self, mod_type, data, disp, ip=None):
-        &#34;&#34;&#34;Send OSC message with [data] to the given socket and ip address.&#34;&#34;&#34;
-        ip = ip or self.__servervalidation.ipaddress
-        client = SimpleUDPClient(ip,
-                                 self.__servervalidation.port + disp)
+    def sendMessage(self, mod_type, data):
+        &#34;&#34;&#34;Send OSC message with [data] to the slave instances if it is a master machine.&#34;&#34;&#34;
+        if self.__isMaster is False:
+            return
+        for ip in self.__slaves:
+            self.__sender.sendMessage(mod_type, data, 0, ip=ip)
 
-        bundle = osc_bundle_builder.OscBundleBuilder(osc_bundle_builder.IMMEDIATELY)
-        msg = osc_message_builder.OscMessageBuilder(address=self.__servervalidation.basePath + mod_type.value[1])
-        msg.add_arg(self.__servervalidation.id_lg)
-        msg.add_arg(mod_type.value[0])
-        msg.add_arg(data)
-        bundle.add_content(msg.build())
-        bundle = bundle.build()
-        client.send(bundle)</code></pre>
+    def _getSlaves(self):
+        &#34;&#34;&#34;Get number of slaves to be used from user. Default is 0.&#34;&#34;&#34;
+        print(&#34;Enter the number of slaves to be used : &#34;)
+        try:
+            return int(input())
+        except:
+            return 0
+
+    def _isMaster(self):
+        &#34;&#34;&#34;Get machine number from user. Default machine number is 0(master).&#34;&#34;&#34;
+        print(&#34;Enter machine number (0 =&gt; master, &gt;0 =&gt; slave) : &#34;)
+        try:
+            return int(input())
+        except:
+            return 0
+
+    def _getIP(self):
+        &#34;&#34;&#34;Get IP address of slaves to be used from user.&#34;&#34;&#34;
+        ip = []
+        for i in range(self.__numOfSlaves):
+            print(&#34;Enter IP address of &#34; + str(i + 1) + &#34; slave : &#34;)
+            try:
+                ip.append(input())
+            except:
+                print(&#39;Invalid IP address. Please re-configure completely.&#39;)
+
+        return ip</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
-<dt id="app.controller.OSCSender.OSCSender.getInstance"><code class="name flex">
+<dt id="app.controller.SlaveHandler.SlaveHandler.getInstance"><code class="name flex">
 <span>def <span class="ident">getInstance</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Get the singleton instance of [OSCSender].</p></section>
+<section class="desc"><p>Get the singleton instance of [SlaveHandler].</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def getInstance():
-    &#34;&#34;&#34;Get the singleton instance of [OSCSender].&#34;&#34;&#34;
-    if OSCSender.__instance is None:
-        OSCSender()
-    return OSCSender.__instance</code></pre>
+    &#34;&#34;&#34;Get the singleton instance of [SlaveHandler].&#34;&#34;&#34;
+    if SlaveHandler.__instance is None:
+        SlaveHandler()
+    return SlaveHandler.__instance</code></pre>
 </details>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="app.controller.OSCSender.OSCSender.sendMessage"><code class="name flex">
-<span>def <span class="ident">sendMessage</span></span>(<span>self, mod_type, data, disp, ip=None)</span>
+<dt id="app.controller.SlaveHandler.SlaveHandler.sendMessage"><code class="name flex">
+<span>def <span class="ident">sendMessage</span></span>(<span>self, mod_type, data)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Send OSC message with [data] to the given socket and ip address.</p></section>
+<section class="desc"><p>Send OSC message with [data] to the slave instances if it is a master machine.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def sendMessage(self, mod_type, data, disp, ip=None):
-    &#34;&#34;&#34;Send OSC message with [data] to the given socket and ip address.&#34;&#34;&#34;
-    ip = ip or self.__servervalidation.ipaddress
-    client = SimpleUDPClient(ip,
-                             self.__servervalidation.port + disp)
-
-    bundle = osc_bundle_builder.OscBundleBuilder(osc_bundle_builder.IMMEDIATELY)
-    msg = osc_message_builder.OscMessageBuilder(address=self.__servervalidation.basePath + mod_type.value[1])
-    msg.add_arg(self.__servervalidation.id_lg)
-    msg.add_arg(mod_type.value[0])
-    msg.add_arg(data)
-    bundle.add_content(msg.build())
-    bundle = bundle.build()
-    client.send(bundle)</code></pre>
+<pre><code class="python">def sendMessage(self, mod_type, data):
+    &#34;&#34;&#34;Send OSC message with [data] to the slave instances if it is a master machine.&#34;&#34;&#34;
+    if self.__isMaster is False:
+        return
+    for ip in self.__slaves:
+        self.__sender.sendMessage(mod_type, data, 0, ip=ip)</code></pre>
 </details>
 </dd>
 </dl>
@@ -170,10 +208,10 @@ def getInstance():
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="app.controller.OSCSender.OSCSender" href="#app.controller.OSCSender.OSCSender">OSCSender</a></code></h4>
+<h4><code><a title="app.controller.SlaveHandler.SlaveHandler" href="#app.controller.SlaveHandler.SlaveHandler">SlaveHandler</a></code></h4>
 <ul class="">
-<li><code><a title="app.controller.OSCSender.OSCSender.getInstance" href="#app.controller.OSCSender.OSCSender.getInstance">getInstance</a></code></li>
-<li><code><a title="app.controller.OSCSender.OSCSender.sendMessage" href="#app.controller.OSCSender.OSCSender.sendMessage">sendMessage</a></code></li>
+<li><code><a title="app.controller.SlaveHandler.SlaveHandler.getInstance" href="#app.controller.SlaveHandler.SlaveHandler.getInstance">getInstance</a></code></li>
+<li><code><a title="app.controller.SlaveHandler.SlaveHandler.sendMessage" href="#app.controller.SlaveHandler.SlaveHandler.sendMessage">sendMessage</a></code></li>
 </ul>
 </li>
 </ul>
